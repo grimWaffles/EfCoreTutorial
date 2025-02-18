@@ -1,4 +1,4 @@
-﻿using EfCoreTutorial.Entity;
+﻿using EfCoreTutorial.Entity.SchoolModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

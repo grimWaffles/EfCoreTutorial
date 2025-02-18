@@ -1,0 +1,20 @@
+Models & Relationships:
+--------------------------------------------------
+1) Users
+
+2) Products
+	-> SellerId FK
+	-> PrimaryProductCategoryId FK
+	-> SecondaryProductCategoryId FK
+
+3) Orders (Pending)
+	-> ProductId FK
+	-> UserId FK 
+
+4) Cart
+	-> UserId FK
+	-> ProductId FK
+
+5) Sellers
+
+6) ProductCategory

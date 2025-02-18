@@ -1,5 +1,5 @@
 ﻿using EfCoreTutorial.Database;
-using EfCoreTutorial.Entity;
+using EfCoreTutorial.Entity.SchoolModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -274,8 +274,8 @@ void ExecuteStoredProcedures()
 //Console.WriteLine("Version 6");
 //ExecuteRawSql();
 
-Console.WriteLine("Version 7");
-ExecuteStoredProcedures();
+//Console.WriteLine("Version 7");
+//ExecuteStoredProcedures();
 
 
 
