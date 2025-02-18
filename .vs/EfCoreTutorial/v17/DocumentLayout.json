@@ -1,0 +1,109 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\entity\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:entity\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\migrations\\20250218044308_sp-modifygradetable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:migrations\\20250218044308_sp-modifygradetable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\entity\\grade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:entity\\grade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\database\\schoolcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:database\\schoolcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 367,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "20250218044308_SP-ModifyGradeTable.cs",
+              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Migrations\\20250218044308_SP-ModifyGradeTable.cs",
+              "RelativeDocumentMoniker": "Migrations\\20250218044308_SP-ModifyGradeTable.cs",
+              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Migrations\\20250218044308_SP-ModifyGradeTable.cs",
+              "RelativeToolTip": "Migrations\\20250218044308_SP-ModifyGradeTable.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T05:19:57.132Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SchoolContext.cs",
+              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Database\\SchoolContext.cs",
+              "RelativeDocumentMoniker": "Database\\SchoolContext.cs",
+              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Database\\SchoolContext.cs",
+              "RelativeToolTip": "Database\\SchoolContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-11T06:55:43.171Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Grade.cs",
+              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\Grade.cs",
+              "RelativeDocumentMoniker": "Entity\\Grade.cs",
+              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\Grade.cs",
+              "RelativeToolTip": "Entity\\Grade.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-11T06:48:09.303Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Student.cs",
+              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\Student.cs",
+              "RelativeDocumentMoniker": "Entity\\Student.cs",
+              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\Student.cs",
+              "RelativeToolTip": "Entity\\Student.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABoAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-11T06:46:31.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAAOwAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-11T06:21:44.169Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
