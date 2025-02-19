@@ -61,5 +61,11 @@ namespace EfCoreTutorial.Entity.ECommerceModels
 
         public Seller Seller { get; set; }
         public ProductCategory ProductCategory { get; set; }
+
+        [NotMapped]
+        public string SellerCompanyName { get; set; }
+
+        [NotMapped]
+        public string ProductCategoryName { get; set; }
     }
 }

@@ -295,18 +295,18 @@ void InsertFirstUser()
     DateTime createdDate = DateTime.Now;
     bool isDeleted = false;
 
-    using(var db = new EcommerceContext())
+    using (var db = new EcommerceContext())
     {
         try
         {
             User u = db.Users.First();
-            
+
             if (u == null)
             {
                 db.Users.FromSql($"Insert into Users(Username, Password, Email, MobileNo, CreatedBy, CreatedDate, IsDeleted) values({username},{password},{email},{mobileNo},{createdBy},{createdDate},{isDeleted})\r\n");
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine("Failed to insert user.");
         }
@@ -324,7 +324,7 @@ void PopulateProductCategories()
 
             if (productCategories.Count == 0)
             {
-                User u = db.Users.Where(u=>u.Id == userId).FirstOrDefault();
+                User u = db.Users.Where(u => u.Id == userId).FirstOrDefault();
 
                 Console.WriteLine("No data found");
                 string categoryDataString = "Electronics, Clothing, Home & Kitchen, Beauty & Personal Care, Health & Wellness, Toys & Games, Sports & Outdoors, Automotive, Office Supplies, Books, Music & Instruments, Pet Supplies, Grocery & Gourmet Food, Baby Products, Jewelry & Accessories, Shoes & Footwear, Garden & Outdoor, Tools & Home Improvement, Fitness & Exercise, Arts & Crafts, Video Games, Furniture, Watches, Industrial & Scientific, Travel Accessories, Smart Home Devices, Party Supplies, Cameras & Photography, Collectibles, Subscription Boxes";
@@ -333,7 +333,8 @@ void PopulateProductCategories()
 
                 foreach (string cat in catList)
                 {
-                    categories.Add(new ProductCategory() {
+                    categories.Add(new ProductCategory()
+                    {
                         CategoryName = cat,
                         IsDeleted = false,
                         CreatedBy = userId,
@@ -354,9 +355,9 @@ void PopulateProductCategories()
             }
             else
             {
-                for(int i = 0; i< productCategories.Count; i++)
+                for (int i = 0; i < productCategories.Count; i++)
                 {
-                    Console.WriteLine($"Cat ID: {i+1} Product Category: {productCategories[i].CategoryName}");
+                    Console.WriteLine($"Cat ID: {i + 1} Product Category: {productCategories[i].CategoryName}");
                 }
             }
         }
@@ -404,7 +405,7 @@ void PopulateSellers()
     List<Seller> sellers = new List<Seller>();
     string[] seller_string = sellerInfo.Split(":");
 
-    foreach(string s1 in seller_string) 
+    foreach (string s1 in seller_string)
     {
         string[] s = s1.Split(",");
 
@@ -491,6 +492,163 @@ void PopulateProducts()
                             Bluetooth Speaker, 1, 4.5, $99, Waterproof portable Bluetooth speaker, Gadget World, Electronics :
                             ";
 
+    string product_string_2 = @"Car Vacuum Cleaner, 1, 4.3, $59, Portable car vacuum cleaner with attachments, Quick Cart, Automotive :  
+                            LED Headlights, 1, 4.7, $99, Super bright LED headlights for cars, Direct Deals, Automotive :  
+                            Office Chair, 1, 4.5, $149, Ergonomic office chair with lumbar support, Global Traders, Office Supplies :  
+                            Writing Desk, 1, 4.4, $199, Wooden writing desk with storage drawers, BestChoice, Office Supplies :  
+                            Fiction Novel, 1, 4.6, $19, Best-selling fiction novel by top author, Speedy Mart, Books :  
+                            Cookbook, 1, 4.3, $29, Cookbook with 100+ delicious recipes, Elite Emporium, Books :  
+                            Acoustic Guitar, 1, 4.5, $199, Wooden acoustic guitar for beginners, Bargain Hub, Music & Instruments :  
+                            Keyboard Piano, 1, 4.6, $249, 61-key digital piano with built-in speakers, Home Essentials, Music & Instruments :  
+                            Dog Food, 1, 4.4, $39, Nutrient-rich dry dog food for all breeds, ABC Traders, Pet Supplies :  
+                            Cat Litter, 1, 4.5, $19, Odor-control cat litter with clumping formula, XYZ Enterprises, Pet Supplies :  
+                            Organic Coffee, 1, 4.6, $15, Freshly ground organic coffee beans, Global Mart, Grocery & Gourmet Food :  
+                            Protein Powder, 1, 4.7, $49, Whey protein powder for muscle recovery, Sunrise Retail, Grocery & Gourmet Food :  
+                            Baby Stroller, 1, 4.8, $299, Lightweight and foldable baby stroller, Elite Supplies, Baby Products :  
+                            Diapers, 1, 4.5, $39, Ultra-absorbent baby diapers, Best Deals Inc., Baby Products :  
+                            Silver Necklace, 1, 4.3, $99, Sterling silver necklace with pendant, SuperMart, Jewelry & Accessories :  
+                            Luxury Watch, 1, 4.7, $499, Elegant stainless steel luxury watch, FastShop, Watches :  
+                            Artificial Grass Mat, 1, 4.4, $79, Realistic artificial grass mat for outdoors, Prime Goods, Garden & Outdoor :  
+                            Power Drill, 1, 4.6, $129, Cordless power drill with multiple speeds, QuickBuy, Tools & Home Improvement :  
+                            Foam Roller, 1, 4.5, $29, High-density foam roller for muscle relief, MegaMart, Fitness & Exercise :  
+                            Watercolor Paint Set, 1, 4.3, $39, Professional watercolor paint set, ValueMart, Arts & Crafts :  
+                            Gaming Mouse, 1, 4.7, $79, High-precision gaming mouse with RGB lighting, Tech Haven, Video Games :  
+                            Smart Light Bulbs, 1, 4.5, $49, WiFi-enabled smart light bulbs, Urban Bazaar, Smart Home Devices :  
+                            Disposable Party Plates, 1, 4.3, $19, Biodegradable party plates, SmartChoice, Party Supplies :  
+                            DSLR Camera, 1, 4.7, $699, High-resolution DSLR camera, ProDeals, Cameras & Photography :  
+                            Vintage Collectible Coins, 1, 4.8, $199, Rare collectible coin set, Trendy Hub, Collectibles :  
+                            Wine Subscription Box, 1, 4.6, $79, Monthly curated wine selection, EasyShop, Subscription Boxes :  
+                            Electric Kettle, 1, 4.4, $39, Fast-boiling electric kettle, FreshMart, Home & Kitchen :  
+                            Bluetooth Speaker, 1, 4.5, $99, Waterproof portable Bluetooth speaker, Gadget World, Electronics :  
+                            Standing Desk, 1, 4.6, $249, Height-adjustable standing desk, Everyday Needs, Office Supplies :  
+                            Camping Stove, 1, 4.4, $89, Portable propane camping stove, Smart Buys, Sports & Outdoors :  
+                            Wireless Keyboard, 1, 4.5, $79, Ergonomic wireless keyboard with backlight, Quick Cart, Office Supplies :  
+                            Action Camera, 1, 4.7, $299, Waterproof action camera with 4K video, Direct Deals, Cameras & Photography :  
+                            Board Game, 1, 4.6, $49, Fun and engaging board game for families, Global Traders, Toys & Games :  
+                            Car Phone Mount, 1, 4.4, $29, Adjustable phone mount for cars, BestChoice, Automotive :  
+                            Resistance Bands, 1, 4.5, $25, Set of resistance bands for workouts, Speedy Mart, Fitness & Exercise :  
+                            Noise-Canceling Headphones, 1, 4.7, $299, Over-ear noise-canceling headphones, Elite Emporium, Electronics :  
+                            Tactical Flashlight, 1, 4.6, $49, High-lumen tactical flashlight, Bargain Hub, Tools & Home Improvement :  
+                            Smart Doorbell, 1, 4.5, $129, Video-enabled smart doorbell, Home Essentials, Smart Home Devices :  
+                            Fishing Rod, 1, 4.4, $89, Lightweight and durable fishing rod, ABC Traders, Sports & Outdoors :  
+                            Projector, 1, 4.6, $399, HD projector with WiFi support, XYZ Enterprises, Electronics :  
+                            Baking Set, 1, 4.5, $79, Complete baking set with utensils, Global Mart, Home & Kitchen :  
+                            Wireless Charging Pad, 1, 4.3, $49, Fast-charging wireless pad, Sunrise Retail, Electronics :  
+                            Robot Vacuum, 1, 4.7, $299, Self-cleaning robot vacuum with mapping, Elite Supplies, Home & Kitchen :  
+                            Smart Thermostat, 1, 4.5, $199, Energy-efficient smart thermostat, Best Deals Inc., Smart Home Devices :  
+                            Luggage Set, 1, 4.6, $249, 3-piece lightweight luggage set, SuperMart, Travel Accessories :  
+                            Garden Hose, 1, 4.4, $39, Expandable and durable garden hose, FastShop, Garden & Outdoor :  
+                            Mechanical Keyboard, 1, 4.7, $129, RGB backlit mechanical keyboard, Prime Goods, Electronics :  
+                            Travel Pillow, 1, 4.5, $29, Memory foam travel pillow, QuickBuy, Travel Accessories :  
+                            Electric Bike, 1, 4.8, $1299, High-speed electric bike with long battery life, MegaMart, Sports & Outdoors  
+                            ";
+
+    string[] productInfo = product_string.Split(":");
+    string[] productInfo2 = product_string_2.Split(":");
+
+    string[] sellerNameArray = new string[productInfo.Length];
+
+    List<Product> products = new List<Product>();
+    List<string> failedProducts = new List<string>();
+
+    #region Parse the string into Product lists
+    try
+    {
+        foreach (string p1 in productInfo)
+        {
+            string[] p = p1.Split(",");
+            
+            if (p.Length == 7)
+            {
+                try
+                {
+                    Product product = new Product()
+                    {
+                        Name = p[0].Trim(),
+                        DefaultQuantity = Convert.ToInt32(p[1].Trim()),
+                        Rating = Convert.ToDecimal(p[2].Trim()),
+                        Price = Convert.ToDecimal(p[3].Trim().Replace("$", "")),
+                        Description = p[4].Trim(),
+                        SellerCompanyName = p[5].Trim(),
+                        ProductCategoryName = p[6].Trim(),
+                    };
+
+                    products.Add(product);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            else
+            {
+                failedProducts.Add(p1);
+            }
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Failed to parse product string #1.");
+    }
+
+    try
+    {
+        foreach (string p1 in productInfo2)
+        {
+            string[] p = p1.Split(",");
+
+            if (p.Length == 7)
+            {
+                try
+                {
+                    Product product = new Product()
+                    {
+                        Name = p[0].Trim(),
+                        DefaultQuantity = Convert.ToInt32(p[1].Trim()),
+                        Rating = Convert.ToDecimal(p[2].Trim()),
+                        Price = Convert.ToDecimal(p[3].Trim().Replace("$", "")),
+                        Description = p[4].Trim(),
+                        SellerCompanyName = p[5].Trim(),
+                        ProductCategoryName = p[6].Trim(),
+                    };
+
+                    products.Add(product);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            else
+            {
+                failedProducts.Add(p1);
+            }
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Failed to parse product string #2.");
+    }
+    #endregion
+
+    using (var db = new EcommerceContext())
+    {
+        try
+        {
+            foreach (Product p in products)
+            {
+                Seller seller = db.Sellers.Where(s => s.CompanyName == p.SellerCompanyName).Select(x => new Seller() { Id = x.Id }).FirstOrDefault();
+                ProductCategory category = db.ProductCategories.Where(s => s.CategoryName == p.ProductCategoryName).Select(x => new ProductCategory() { Id = x.Id }).FirstOrDefault();
+
+                p.SellerId = seller != null ? seller.Id : 0;
+                p.ProductCategoryId = category != null ? category.Id : 0;
+            }
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
 }
 ///Main Execution Thread
 //InsertFirstUser();
