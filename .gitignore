@@ -1,0 +1,20 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/EfCoreTutorial/DesignTimeBuild/.dtbcache.v2
+/.vs/EfCoreTutorial/FileContentIndex/5239be27-21a0-4471-97ac-e7ca95df276d.vsidx
+/.vs/EfCoreTutorial/FileContentIndex/61027868-9238-403b-8b90-35a2bb5dac77.vsidx
+/.vs/EfCoreTutorial/FileContentIndex/a23cd400-59e4-4601-acee-6b2b2cc60dcc.vsidx
+/.vs/EfCoreTutorial/FileContentIndex/a8d7c2e9-9bae-4e13-9455-92a1a669d443.vsidx
+/.vs/EfCoreTutorial/FileContentIndex/b0e528cf-791b-4b45-9607-aa5cce47f78a.vsidx
+/.vs/EfCoreTutorial/FileContentIndex/c1d7ef23-b354-4af0-838e-10fc306aa8db.vsidx
+/.vs/EfCoreTutorial/FileContentIndex/d34bd39a-2737-408e-9177-8318b201dbcc.vsidx
+/.vs/EfCoreTutorial/FileContentIndex/f850d90b-2dd8-459b-a857-f1d10236d04f.vsidx
+/.vs/EfCoreTutorial/FileContentIndex/8809ae4b-05a7-43f6-9de2-189f2c080e0b.vsidx
+*.vsidx
+/.vs/EfCoreTutorial/v17/.suo
+/.vs/EfCoreTutorial/v17/DocumentLayout.json
+/bin/Debug/net8.0/EfCoreTutorial.dll
+/bin/Debug/net8.0/EfCoreTutorial.exe
+/bin/Debug/net8.0/EfCoreTutorial.pdb

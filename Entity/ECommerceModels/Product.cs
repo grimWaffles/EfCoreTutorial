@@ -15,7 +15,7 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         {
             Name = ""; DefaultQuantity = 0; Rating = 0; Price = 0; Description = "";
             CreatedByUser = new User(); ModifiedByUser = new User();
-            Seller = new Seller();  ProductCategory = new ProductCategory();
+            Seller = new Seller(); ProductCategory = new ProductCategory();
         }
 
         [Key]
@@ -27,7 +27,7 @@ namespace EfCoreTutorial.Entity.ECommerceModels
 
         public int? DefaultQuantity { get; set; }
 
-        [Precision(18,4)]
+        [Precision(18, 4)]
         public decimal Rating { get; set; }
 
         [Precision(18, 4)]

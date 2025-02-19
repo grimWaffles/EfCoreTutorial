@@ -302,3 +302,4 @@ D:\Old PC Backup\Projects\Test Project\EfCoreTutorial_v1\obj\Debug\net8.0\refint
 D:\Old PC Backup\Projects\Test Project\EfCoreTutorial_v1\obj\Debug\net8.0\EfCoreTutorial.pdb
 D:\Old PC Backup\Projects\Test Project\EfCoreTutorial_v1\obj\Debug\net8.0\EfCoreTutorial.genruntimeconfig.cache
 D:\Old PC Backup\Projects\Test Project\EfCoreTutorial_v1\obj\Debug\net8.0\ref\EfCoreTutorial.dll
+D:\Old PC Backup\Projects\Test Project\EfCoreTutorial_v1\obj\Debug\net8.0\EfCoreTutorial.sourcelink.json

@@ -15,13 +15,16 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         public ProductCategory()
         {
             Products = new List<Product>();
+            CreatedByUser = new User();
+            ModifiedByUser = new User();
+            CategoryName = "";
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [MaxLength(100)]    
+        [MaxLength(100)]
         public string CategoryName { get; set; }
 
         [Required]

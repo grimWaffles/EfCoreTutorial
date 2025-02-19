@@ -15,6 +15,12 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         public Seller()
         {
             Products = new List<Product>();
+            CreatedByUser = new User();
+            ModifiedByUser = new User();
+            CompanyName = "";
+            Address = "";
+            MobileNo = "";
+            Email = "";
         }
 
         [Key]
@@ -26,14 +32,14 @@ namespace EfCoreTutorial.Entity.ECommerceModels
 
         [MaxLength(100)]
         public string Address { get; set; }
-        
+
         [MaxLength(11)]
         public string MobileNo { get; set; }
-        
+
         [MaxLength(50)]
         public string Email { get; set; }
 
-        [Precision(18,2)]
+        [Precision(18, 2)]
         public decimal Rating { get; set; }
 
         [Required]

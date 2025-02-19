@@ -12,13 +12,21 @@ namespace EfCoreTutorial.Entity.ECommerceModels
 {
     public class Cart
     {
+        public Cart()
+        {
+            CreatedByUser = new User();
+            ModifiedByUser = new User();
+            Product = new Product();
+            User = new User();
+        }
+
         [Required]
         public int ProductId { get; set; }
         [Required]
         public int UserId { get; set; }
 
         public int Quantity { get; set; }
-        
+
         [Required]
         public int CreatedBy { get; set; }
 
