@@ -649,6 +649,12 @@ void PopulateProducts()
             Console.WriteLine(e.Message);
         }
     }
+
+    int count = products.Where(p => p.SellerId == null || p.ProductCategoryId == null).ToList().Count();
+    if(count>0)
+    {
+        Console.WriteLine("Failed to Fetch for all products!");
+    }
 }
 ///Main Execution Thread
 //InsertFirstUser();
