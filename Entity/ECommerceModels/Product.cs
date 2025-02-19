@@ -14,8 +14,6 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         public Product()
         {
             Name = ""; DefaultQuantity = 0; Rating = 0; Price = 0; Description = "";
-            CreatedByUser = new User(); ModifiedByUser = new User();
-            Seller = new Seller(); ProductCategory = new ProductCategory();
         }
 
         [Key]

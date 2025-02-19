@@ -3,16 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace EfCoreTutorial.Migrations.ECommercePlatform
+namespace EfCoreTutorial.Migrations.Ecommerce
 {
     /// <inheritdoc />
-    public partial class ECommerceModels : Migration
+    public partial class EcommerceCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -29,17 +29,55 @@ namespace EfCoreTutorial.Migrations.ECommercePlatform
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_User_User_CreatedBy",
+                        name: "FK_Users_Users_CreatedBy",
                         column: x => x.CreatedBy,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_User_User_ModifiedBy",
+                        name: "FK_Users_Users_ModifiedBy",
                         column: x => x.ModifiedBy,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OrderCounter = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NetAmount = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Users_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Orders_Users_ModifiedBy",
+                        column: x => x.ModifiedBy,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Orders_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,14 +97,14 @@ namespace EfCoreTutorial.Migrations.ECommercePlatform
                 {
                     table.PrimaryKey("PK_ProductCategories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductCategories_User_CreatedBy",
+                        name: "FK_ProductCategories_Users_CreatedBy",
                         column: x => x.CreatedBy,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ProductCategories_User_ModifiedBy",
+                        name: "FK_ProductCategories_Users_ModifiedBy",
                         column: x => x.ModifiedBy,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -91,14 +129,14 @@ namespace EfCoreTutorial.Migrations.ECommercePlatform
                 {
                     table.PrimaryKey("PK_Sellers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sellers_User_CreatedBy",
+                        name: "FK_Sellers_Users_CreatedBy",
                         column: x => x.CreatedBy,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Sellers_User_ModifiedBy",
+                        name: "FK_Sellers_Users_ModifiedBy",
                         column: x => x.ModifiedBy,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -137,14 +175,14 @@ namespace EfCoreTutorial.Migrations.ECommercePlatform
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_User_CreatedBy",
+                        name: "FK_Products_Users_CreatedBy",
                         column: x => x.CreatedBy,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Products_User_ModifiedBy",
+                        name: "FK_Products_Users_ModifiedBy",
                         column: x => x.ModifiedBy,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -170,21 +208,65 @@ namespace EfCoreTutorial.Migrations.ECommercePlatform
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Carts_User_CreatedBy",
+                        name: "FK_Carts_Users_CreatedBy",
                         column: x => x.CreatedBy,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Carts_User_ModifiedBy",
+                        name: "FK_Carts_Users_ModifiedBy",
                         column: x => x.ModifiedBy,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Carts_User_UserId",
+                        name: "FK_Carts_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    GrossAmount = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Users_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Users_ModifiedBy",
+                        column: x => x.ModifiedBy,
+                        principalTable: "Users",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -205,6 +287,46 @@ namespace EfCoreTutorial.Migrations.ECommercePlatform
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_UserId",
                 table: "Carts",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_CreatedBy",
+                table: "OrderItems",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_ModifiedBy",
+                table: "OrderItems",
+                column: "ModifiedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_OrderId",
+                table: "OrderItems",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_ProductId",
+                table: "OrderItems",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_CreatedBy",
+                table: "Orders",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_ModifiedBy",
+                table: "Orders",
+                column: "ModifiedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_OrderDate_OrderCounter",
+                table: "Orders",
+                columns: new[] { "OrderDate", "OrderCounter" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_UserId",
+                table: "Orders",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -260,25 +382,31 @@ namespace EfCoreTutorial.Migrations.ECommercePlatform
                 column: "ModifiedBy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_CreatedBy",
-                table: "User",
+                name: "IX_Users_CreatedBy",
+                table: "Users",
                 column: "CreatedBy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_MobileNo",
-                table: "User",
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_MobileNo",
+                table: "Users",
                 column: "MobileNo",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_ModifiedBy",
-                table: "User",
+                name: "IX_Users_ModifiedBy",
+                table: "Users",
                 column: "ModifiedBy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_Username_Email",
-                table: "User",
-                columns: new[] { "Username", "Email" },
+                name: "IX_Users_Username",
+                table: "Users",
+                column: "Username",
                 unique: true);
         }
 
@@ -287,6 +415,12 @@ namespace EfCoreTutorial.Migrations.ECommercePlatform
         {
             migrationBuilder.DropTable(
                 name: "Carts");
+
+            migrationBuilder.DropTable(
+                name: "OrderItems");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");
@@ -298,7 +432,7 @@ namespace EfCoreTutorial.Migrations.ECommercePlatform
                 name: "Sellers");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }

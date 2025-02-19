@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace EfCoreTutorial.Migrations.ECommercePlatform
+namespace EfCoreTutorial.Migrations.Ecommerce
 {
     [DbContext(typeof(EcommerceContext))]
-    [Migration("20250219074351_OrderAndOrderItemModel")]
-    partial class OrderAndOrderItemModel
+    [Migration("20250219092642_EcommerceCreate")]
+    partial class EcommerceCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -384,7 +384,7 @@ namespace EfCoreTutorial.Migrations.ECommercePlatform
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("EfCoreTutorial.Entity.ECommerceModels.Cart", b =>

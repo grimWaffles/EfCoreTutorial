@@ -14,7 +14,6 @@ namespace EfCoreTutorial.Entity.ECommerceModels
     {
         public OrderItem()
         {
-            CreatedByUser = new User(); ModifiedByUser = new User();
             Product = new Product(); Order = new Order();
         }
 

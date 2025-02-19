@@ -15,8 +15,6 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         public ProductCategory()
         {
             Products = new List<Product>();
-            CreatedByUser = new User();
-            ModifiedByUser = new User();
             CategoryName = "";
         }
 

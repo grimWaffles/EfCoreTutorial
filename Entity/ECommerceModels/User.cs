@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EfCoreTutorial.Entity.ECommerceModels
 {
-    [Table("User")]
+    [Table("Users")]
     [Index(nameof(Username), IsUnique = true)]
     [Index(nameof(MobileNo), IsUnique = true)]
     [Index(nameof(Email), IsUnique = true)]
@@ -19,8 +19,8 @@ namespace EfCoreTutorial.Entity.ECommerceModels
     {
         public User()
         {
-            Username = ""; Password = ""; Email = ""; MobileNo = ""; CreatedByUser = new User();
-            ModifiedByUser = new User();
+            Username = ""; Password = ""; Email = ""; MobileNo = "";
+            CreatedDate = DateTime.MinValue;
         }
 
         [Key]
@@ -41,7 +41,7 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         public string MobileNo { get; set; }
 
         [Required]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; } = DateTime.MinValue;
 
         [Required]
         public int CreatedBy { get; set; }

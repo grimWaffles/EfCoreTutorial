@@ -14,8 +14,6 @@ namespace EfCoreTutorial.Entity.ECommerceModels
     {
         public Cart()
         {
-            CreatedByUser = new User();
-            ModifiedByUser = new User();
             Product = new Product();
             User = new User();
         }

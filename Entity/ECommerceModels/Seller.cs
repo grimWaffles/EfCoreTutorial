@@ -15,8 +15,6 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         public Seller()
         {
             Products = new List<Product>();
-            CreatedByUser = new User();
-            ModifiedByUser = new User();
             CompanyName = "";
             Address = "";
             MobileNo = "";
