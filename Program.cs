@@ -4,6 +4,7 @@ using EfCoreTutorial.Entity.SchoolModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using static EfCoreTutorial.Entity.Enums;
 
 Console.WriteLine("Hello, Wazi!");
@@ -777,11 +778,11 @@ void PopulateUserRoles()
 void PopulateCustomers()
 {
     int customerRoleId = 0;
-    
+
     using (var db = new EcommerceContext())
     {
         int customerCount = db.Users.Include(u => u.Role).Where(u => u.Role.Name == UserRole.CUSTOMER).Count();
-        
+
         if (customerCount > 0)
         {
             Console.WriteLine("Customers already added");
@@ -825,11 +826,11 @@ void PopulateCustomers()
 
     List<User> users = new List<User>();
 
-    foreach(string s in users_arr)
+    foreach (string s in users_arr)
     {
         string[] user = s.Split(",");
 
-        if(user.Length == 4)
+        if (user.Length == 4)
         {
             users.Add(new User()
             {
@@ -848,25 +849,131 @@ void PopulateCustomers()
 
     try
     {
-        using(var db = new EcommerceContext())
+        using (var db = new EcommerceContext())
         {
             db.Users.AddRange(users);
             db.SaveChanges();
         }
     }
-    catch(Exception e)
+    catch (Exception e)
     {
         Console.WriteLine(e.Message);
     }
 }
+
+void AddOrders()
+{
+    int maxCustomerId = 0; int maxProductId = 0; int maxOrderId = 0; int maxOrderCounter = 0;
+
+    using (var db = new EcommerceContext())
+    {
+        maxCustomerId = db.Users.Include(u => u.Role).Where(u => u.Role.Name == UserRole.CUSTOMER).Select(c => c.Id).Max();
+        maxProductId = db.Products.Select(p => p.Id).Max();
+        maxOrderId = db.Orders.Count();
+
+        List<Order> orders = db.Orders.ToList();
+        Console.WriteLine($"Order Date: {orders[0].OrderDate.ToString("dd-MM-yyyy")}");
+
+        //maxOrderCounter = maxOrderId == 0 ? 0 : db.Orders
+        //    .Where(o => o.OrderDate != null && o.OrderDate.ToString("dd-MM-yyyy") == DateTime.Now.ToString("dd-MM-yyyy"))
+        //    .Select(o => o.OrderCounter)
+        //    .Max();
+
+        //int userId = new Random().Next(2, maxCustomerId);
+        //User u = new User();
+
+        //while (u.Id == 0)
+        //{
+        //    try
+        //    {
+        //        User u1 = db.Users.Where(u => u.Id == userId).First();
+
+        //        if (u1 != null)
+        //        {
+        //            u = u1;
+        //        }
+        //    }
+        //    catch
+        //    {
+
+        //    }
+        //}
+
+        //maxOrderCounter++;
+
+        //Order order = new Order()
+        //{
+        //    OrderDate = DateTime.Now,
+        //    OrderCounter = maxOrderCounter,
+        //    UserId = u.Id,
+        //    Status = OrderStatus.PENDING,
+        //    NetAmount = 0,
+        //    CreatedBy = 1,
+        //    CreatedDate = DateTime.Now,
+        //    IsDeleted = false
+        //};
+
+        //int insertedOrderId = 0;
+
+        //try
+        //{
+        //    db.Orders.Add(order);
+        //    db.SaveChanges();
+        //    Console.WriteLine("Order added successfully");
+        //}
+        //catch (Exception e)
+        //{
+        //    Console.WriteLine(e.ToString());
+        //    return;
+        //}
+
+        //try
+        //{
+        //    insertedOrderId = db.Orders.Where(o => o.Status == OrderStatus.PROCESSING && o.OrderDate.ToString("dd-MM-yyyy") == DateTime.Now.ToString("dd-MM-yyyy") && o.OrderCounter == maxOrderCounter).First().Id;
+        //}
+        //catch (Exception e)
+        //{
+        //    Console.WriteLine("Failed to Fetch Inserted Order");
+        //    return;
+        //}
+
+        //if (insertedOrderId != 0)
+        //{
+        //    List<OrderItem> orderItems = new List<OrderItem>();
+
+        //    for (int i = 0; i < new Random().Next(1, 10); i++)
+        //    {
+        //        int productId = new Random().Next(1, maxProductId);
+
+        //        Product p = db.Products.Where(p => p.Id == productId).First();
+        //        int quantity = new Random().Next(1, 50);
+
+        //        OrderItem item = new OrderItem()
+        //        {
+        //            OrderId = insertedOrderId,
+        //            ProductId = p.Id,
+        //            Quantity = quantity,
+        //            GrossAmount = p.Price * quantity,
+        //            Status = OrderItemStatus.AVAILABLE,
+        //            CreatedBy = 1,
+        //            CreatedDate = DateTime.Now,
+        //            IsDeleted = false
+        //        };
+
+        //        orderItems.Add(item);
+        //    }
+        //}
+    }
+}
 ///Main Execution Thread
+
 //InsertFirstUser();
 //PopulateProductCategories();
 //PopulateSellers();
 //PopulateProducts();
 //PopulateUserRoles();
 //PopulateCustomers();
-
+AddOrders();
 
 
 

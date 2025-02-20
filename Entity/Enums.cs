@@ -10,6 +10,7 @@ namespace EfCoreTutorial.Entity
     {
         public enum OrderStatus
         {
+            PROCESSING,
             PENDING,
             SHIPPING,
             COMPLETED,
