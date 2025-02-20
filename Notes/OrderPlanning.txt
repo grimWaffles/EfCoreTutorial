@@ -1,0 +1,7 @@
+Products 
+User
+
+-> Take random user
+-> take random number of products
+-> create the order items
+-> create the order

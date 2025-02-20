@@ -59,7 +59,7 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         [DeleteBehavior(DeleteBehavior.ClientNoAction)]
         public virtual User ModifiedByUser { get; set; }
 
-        public IList<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
 
     }
 }

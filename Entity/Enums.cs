@@ -21,5 +21,11 @@ namespace EfCoreTutorial.Entity
             AVAILABLE,
             STOCKOUT
         }
+        public enum UserRole
+        {
+            ADMIN,
+            CUSTOMER,
+            SELLER
+        }
     }
 }

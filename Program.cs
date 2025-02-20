@@ -4,6 +4,7 @@ using EfCoreTutorial.Entity.SchoolModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using static EfCoreTutorial.Entity.Enums;
 
 Console.WriteLine("Hello, Wazi!");
 
@@ -312,8 +313,20 @@ void InsertFirstUser()
         }
     }
 }
+
 void PopulateProductCategories()
 {
+    using (var db = new EcommerceContext())
+    {
+        int pcCount = db.ProductCategories.Count();
+
+        if (pcCount > 0)
+        {
+            Console.WriteLine("Product Categories already added are already added.");
+            return;
+        }
+    }
+
     int userId = 1;
 
     using (var db = new EcommerceContext())
@@ -370,6 +383,17 @@ void PopulateProductCategories()
 
 void PopulateSellers()
 {
+    using (var db = new EcommerceContext())
+    {
+        int sellerCount = db.Sellers.Count();
+
+        if (sellerCount > 0)
+        {
+            Console.WriteLine("Sellers are already added.");
+            return;
+        }
+    }
+
     string sellerInfo = @"ABC Traders, 123 Main St, 9876543210, abc@example.com, 4.5 :  
                             XYZ Enterprises, 456 Elm St, 8765432109, xyz@example.com, 4.2 :  
                             Global Mart, 789 Oak St, 7654321098, global@example.com, 4.8 :  
@@ -440,7 +464,7 @@ void PopulateSellers()
 
 void PopulateProducts()
 {
-    using(var db = new EcommerceContext())
+    using (var db = new EcommerceContext())
     {
         int productCount = db.Products.Count();
 
@@ -568,7 +592,7 @@ void PopulateProducts()
         foreach (string p1 in productInfo)
         {
             string[] p = p1.Split(",");
-            
+
             if (p.Length == 7)
             {
                 try
@@ -589,7 +613,7 @@ void PopulateProducts()
 
                     products.Add(product);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
@@ -624,7 +648,7 @@ void PopulateProducts()
                         Description = p[4].Trim(),
                         SellerCompanyName = p[5].Trim(),
                         ProductCategoryName = p[6].Trim(),
-                        CreatedBy = 1, 
+                        CreatedBy = 1,
                         CreatedDate = DateTime.Now,
                         IsDeleted = false
                     };
@@ -661,7 +685,7 @@ void PopulateProducts()
                 p.ProductCategoryId = category != null ? category.Id : 0;
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e.Message);
         }
@@ -677,16 +701,162 @@ void PopulateProducts()
     {
         try
         {
-            using(var db = new EcommerceContext())
+            using (var db = new EcommerceContext())
             {
                 db.Products.AddRange(products);
                 db.SaveChanges();
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine($"{e.Message}");
         }
+    }
+}
+
+void PopulateUserRoles()
+{
+    using (var db = new EcommerceContext())
+    {
+        try
+        {
+            int roleCount = db.Roles.Count();
+
+            if (roleCount > 0)
+            {
+                Console.WriteLine("Roles have already been added");
+                return;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Failed to fetch roles");
+            return;
+        }
+
+        List<Role> rolesToAdd = new List<Role>()
+        {
+            new Role()
+            {
+                Name = UserRole.ADMIN,
+                CreatedBy = 1,
+                CreatedDate = DateTime.Now,
+                IsDeleted = false,
+
+            },
+            new Role()
+            {
+                Name = UserRole.CUSTOMER,
+                CreatedBy = 1,
+                CreatedDate = DateTime.Now,
+                IsDeleted = false,
+
+            },
+            new Role()
+            {
+                Name = UserRole.SELLER,
+                CreatedBy = 1,
+                CreatedDate = DateTime.Now,
+                IsDeleted = false,
+
+            }
+        };
+
+        try
+        {
+            db.Roles.AddRange(rolesToAdd);
+            db.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Failed to add roles");
+        }
+    }
+}
+
+void PopulateCustomers()
+{
+    int customerRoleId = 0;
+    
+    using (var db = new EcommerceContext())
+    {
+        int customerCount = db.Users.Include(u => u.Role).Where(u => u.Role.Name == UserRole.CUSTOMER).Count();
+        
+        if (customerCount > 0)
+        {
+            Console.WriteLine("Customers already added");
+        }
+
+        customerRoleId = db.Roles.Where(r => r.Name == UserRole.CUSTOMER).ToList()[0].Id;
+    }
+
+    string user_data = @"    JohnDoe,password123,johndoe@example.com,12345678901 ;
+                           JaneSmith,securePass,jane.smith@example.com,12345678902  ;
+                             MikeBrown,passMike,mike.brown@example.com,12345678903  ;
+                             SarahDavis,sarahPass,sarah.davis@example.com,12345678904  ;
+                             ChrisWilson,chrisW123,chris.wilson@example.com,12345678905 ; 
+                             EmilyClark,emilyC456,emily.clark@example.com,12345678906  ;
+                             DavidWhite,daveWpass,david.white@example.com,12345678907 ; 
+                             LauraHall,lauraH789,laura.hall@example.com,12345678908  ;
+                             JamesMoore,jamesM101,james.moore@example.com,12345678909 ; 
+                          OliviaMartin,oliviaM202,olivia.martin@example.com,12345678910  ;
+                        DanielLee,danLee303,daniel.lee@example.com,12345678911  ;
+                       SophiaLopez,sophiaL404,sophia.lopez@example.com,12345678912 ; 
+                     BenjaminHarris,benH505,benjamin.harris@example.com,12345678913 ; 
+                        AvaYoung,avaY606,ava.young@example.com,12345678914  ;
+                          MatthewKing,mattK707,matthew.king@example.com,12345678915  ;
+                            IsabellaWright,isabellaW808,isabella.wright@example.com,12345678916 ; 
+                          HenryScott,henryS909,henry.scott@example.com,12345678917  ;
+                            MiaGreen,miaG101,mia.green@example.com,12345678918  ;
+                            JackAdams,jackA202,jack.adams@example.com,12345678919  ;
+                            EllaBaker,ellaB303,ella.baker@example.com,12345678920  ;
+                             AlexanderNelson,alexN404,alexander.nelson@example.com,12345678921  ;
+                             LilyCarter,lilyC505,lily.carter@example.com,12345678922  ;
+                            SamuelMitchell,samM606,samuel.mitchell@example.com,12345678923  ;
+                            GracePerez,graceP707,grace.perez@example.com,12345678924  ;
+                           LucasRoberts,lucasR808,lucas.roberts@example.com,12345678925  ;
+                           ChloeTurner,chloeT909,chloe.turner@example.com,12345678926  ;
+                         NathanPhillips,nathanP101,nathan.phillips@example.com,12345678927  ;
+                         ZoeCampbell,zoeC202,zoe.campbell@example.com,12345678928  ;
+                         DylanEvans,dylanE303,dylan.evans@example.com,12345678929  ;
+                        ScarlettMurphy,scarlettM404,scarlett.murphy@example.com,12345678930  ;";
+
+    string[] users_arr = user_data.Split(';');
+
+    List<User> users = new List<User>();
+
+    foreach(string s in users_arr)
+    {
+        string[] user = s.Split(",");
+
+        if(user.Length == 4)
+        {
+            users.Add(new User()
+            {
+                Username = user[0].Trim(),
+                Password = user[1].Trim(),
+                Email = user[2].Trim(),
+                MobileNo = user[3].Trim(),
+                RoleId = customerRoleId,
+
+                CreatedBy = 1,
+                CreatedDate = DateTime.Now,
+                IsDeleted = false
+            });
+        }
+    }
+
+    try
+    {
+        using(var db = new EcommerceContext())
+        {
+            db.Users.AddRange(users);
+            db.SaveChanges();
+        }
+    }
+    catch(Exception e)
+    {
+        Console.WriteLine(e.Message);
     }
 }
 ///Main Execution Thread
@@ -694,7 +864,8 @@ void PopulateProducts()
 //PopulateProductCategories();
 //PopulateSellers();
 //PopulateProducts();
-
+//PopulateUserRoles();
+//PopulateCustomers();
 
 
 

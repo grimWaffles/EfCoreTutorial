@@ -17,6 +17,6 @@ namespace EfCoreTutorial.Entity.SchoolModels
         public string GradeName { get; set; }
 
         //One-to-many Relationships 
-        public IList<Student> Students { get; set; }
+        public ICollection<Student> Students { get; set; }
     }
 }
