@@ -440,6 +440,17 @@ void PopulateSellers()
 
 void PopulateProducts()
 {
+    using(var db = new EcommerceContext())
+    {
+        int productCount = db.Products.Count();
+
+        if (productCount > 0)
+        {
+            Console.WriteLine("Products already entered");
+            return;
+        }
+    }
+
     string product_string = @"Smartphone, 1, 4.5, $699, High-performance smartphone with AMOLED display, ABC Traders, Electronics :  
                             Laptop, 1, 4.7, $1199, Powerful laptop with SSD storage and fast processor, XYZ Enterprises, Electronics :  
                             Wireless Earbuds, 1, 4.3, $149, Noise-canceling wireless earbuds with long battery life, Global Mart, Electronics :  
@@ -449,7 +460,7 @@ void PopulateProducts()
                             Women’s Jeans, 1, 4.5, $49, Stretchable high-waist jeans with a modern fit, SuperMart, Clothing :  
                             Running Shoes, 1, 4.6, $89, Lightweight running shoes with breathable mesh, FastShop, Clothing :  
                             Winter Jacket, 1, 4.7, $129, Insulated winter jacket for extreme cold, Prime Goods, Clothing :  
-                            Leather Wallet, 1, 4.3, $39, Genuine leather wallet with RFID protection, QuickBuy, Accessories :  
+                            Leather Wallet, 1, 4.3, $39, Genuine leather wallet with RFID protection, QuickBuy, Travel Accessories :  
                             Microwave Oven, 1, 4.4, $299, High-power microwave with grill function, MegaMart, Home & Kitchen :  
                             Air Fryer, 1, 4.6, $199, Oil-free cooking air fryer with multiple presets, ValueMart, Home & Kitchen :  
                             Vacuum Cleaner, 1, 4.3, $159, High-suction vacuum cleaner with HEPA filter, Tech Haven, Home & Kitchen :  
@@ -571,6 +582,9 @@ void PopulateProducts()
                         Description = p[4].Trim(),
                         SellerCompanyName = p[5].Trim(),
                         ProductCategoryName = p[6].Trim(),
+                        CreatedBy = 1,
+                        CreatedDate = DateTime.Now,
+                        IsDeleted = false
                     };
 
                     products.Add(product);
@@ -610,6 +624,9 @@ void PopulateProducts()
                         Description = p[4].Trim(),
                         SellerCompanyName = p[5].Trim(),
                         ProductCategoryName = p[6].Trim(),
+                        CreatedBy = 1, 
+                        CreatedDate = DateTime.Now,
+                        IsDeleted = false
                     };
 
                     products.Add(product);
@@ -637,8 +654,8 @@ void PopulateProducts()
         {
             foreach (Product p in products)
             {
-                Seller seller = db.Sellers.Where(s => s.CompanyName == p.SellerCompanyName).Select(x => new Seller() { Id = x.Id }).FirstOrDefault();
-                ProductCategory category = db.ProductCategories.Where(s => s.CategoryName == p.ProductCategoryName).Select(x => new ProductCategory() { Id = x.Id }).FirstOrDefault();
+                Seller seller = db.Sellers.Where(s => s.CompanyName.Trim() == p.SellerCompanyName.Trim()).Select(x => new Seller() { Id = x.Id }).FirstOrDefault();
+                ProductCategory category = db.ProductCategories.Where(s => s.CategoryName.Trim() == p.ProductCategoryName.Trim()).Select(x => new ProductCategory() { Id = x.Id }).FirstOrDefault();
 
                 p.SellerId = seller != null ? seller.Id : 0;
                 p.ProductCategoryId = category != null ? category.Id : 0;
@@ -650,17 +667,33 @@ void PopulateProducts()
         }
     }
 
-    int count = products.Where(p => p.SellerId == null || p.ProductCategoryId == null).ToList().Count();
-    if(count>0)
+    List<Product> failedProductList = products.Where(p => p.SellerId == 0 || p.ProductCategoryId == 0).ToList();
+
+    if (failedProductList.Count > 0)
     {
         Console.WriteLine("Failed to Fetch for all products!");
+    }
+    else
+    {
+        try
+        {
+            using(var db = new EcommerceContext())
+            {
+                db.Products.AddRange(products);
+                db.SaveChanges();
+            }
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine($"{e.Message}");
+        }
     }
 }
 ///Main Execution Thread
 //InsertFirstUser();
 //PopulateProductCategories();
 //PopulateSellers();
-PopulateProducts();
+//PopulateProducts();
 
 
 
