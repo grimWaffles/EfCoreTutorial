@@ -12,11 +12,6 @@ namespace EfCoreTutorial.Entity.ECommerceModels
 {
     public class OrderItem
     {
-        public OrderItem()
-        {
-            Product = new Product(); Order = new Order();
-        }
-
         [Key]
         public int Id { get; set; }
 
