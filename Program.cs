@@ -1,15 +1,18 @@
 ﻿using EfCoreTutorial.Database;
+using EfCoreTutorial.Dtos;
 using EfCoreTutorial.Entity.ECommerceModels;
 using EfCoreTutorial.Entity.SchoolModels;
+using EfCoreTutorial.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System.Collections.Generic;
+using System.Text.Json;
 using static EfCoreTutorial.Entity.Enums;
 
 Console.WriteLine("Hello, Wazi!");
-
+Mapper h = new Mapper();
 //#########################--Function Definitions--#########################//
 
 #region SchoolContext
@@ -1085,9 +1088,9 @@ void UpdateNetAmountOfOrders()
             foreach (Order order in orders)
             {
                 order.Items.Clear();
-                order.Items = db.OrderItems.Include(i=> i.Product).Where(i => i.OrderId == order.Id).ToList();
+                order.Items = db.OrderItems.Include(i => i.Product).Where(i => i.OrderId == order.Id).ToList();
 
-                foreach(OrderItem i in order.Items)
+                foreach (OrderItem i in order.Items)
                 {
                     order.NetAmount += i.Quantity * i.Product.Price;
                 }
@@ -1095,18 +1098,56 @@ void UpdateNetAmountOfOrders()
         }
     }
 
-    using(var db = new EcommerceContext())
+    using (var db = new EcommerceContext())
     {
         try
         {
             db.Orders.UpdateRange(orders);
             db.SaveChanges();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine("Failed to update order amount");
         }
     }
+}
+
+Order getOrderInformation()
+{
+    int orderId = 11;
+    List<OrderItem> allItems = new List<OrderItem>();
+    List<OrderItemDto> dtoItems = new List<OrderItemDto>();
+    OrderInformationDto orderInfo = new OrderInformationDto();
+
+    using (var db = new EcommerceContext())
+    {
+        try
+        {
+            /*This option has a chance of having cyclic errors*/
+            ////Full Query
+            //allItems = db.OrderItems
+            //    .Where(i => i.OrderId == orderId)
+            //    .Include(i => i.Product).ThenInclude(p => p.ProductCategory)
+            //    .Include(i => i.Order).ThenInclude(o => o.User)
+            //    .ToList();
+
+            /*This does not*/
+            //Using DTOs
+            dtoItems = db.OrderItems.Where(i => i.OrderId == orderId).Include(i => i.Product).ThenInclude(p => p.ProductCategory).OrderBy(i => i.Product.Name)
+                .Select(i => h.MapToOrderItemDto(i))
+                .AsNoTracking().ToList();
+
+            orderInfo = db.Orders.Where(o => o.Id == orderId).Include(o => o.User)
+                .Select(o => h.MapToOrderInformationDto(dtoItems, o))
+                .AsNoTracking().First();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"{e.Message}");
+        }
+    }
+
+    return new Order();
 }
 ///Main Execution Thread
 
@@ -1117,7 +1158,9 @@ void UpdateNetAmountOfOrders()
 //PopulateUserRoles();
 //PopulateCustomers();
 
-//for (int i = 1; i <= 1500; i++)
+//int maxOrders = 5000;
+
+//for (int i = 1; i <= maxOrders; i++)
 //{
 //    AddOrders(DateTime.Now);
 
@@ -1130,19 +1173,11 @@ void UpdateNetAmountOfOrders()
 
 //Console.WriteLine("Done adding orders");
 
-UpdateNetAmountOfOrders();
+//UpdateNetAmountOfOrders();
 
-
-
-
-
-
-
-
-
-
-
-
+//Console.WriteLine($"Updated all {maxOrders} order totals.");
+getOrderInformation();
+Console.WriteLine("All Tasks completed");
 
 #endregion
 

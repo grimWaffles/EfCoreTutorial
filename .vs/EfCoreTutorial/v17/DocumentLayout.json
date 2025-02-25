@@ -7,8 +7,20 @@
       "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\entity\\ecommercemodels\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:entity\\ecommercemodels\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\helpers\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:helpers\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\dtos\\orderinformationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:dtos\\orderinformationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\dtos\\orderitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:dtos\\orderitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\entity\\ecommercemodels\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:entity\\ecommercemodels\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\entity\\ecommercemodels\\orderitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\entity\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:entity\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\migrations\\ecommerce\\20250220063131_userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:migrations\\ecommerce\\20250220063131_userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,8 +41,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 367,
-          "SelectedChildIndex": 4,
+          "DockedWidth": 347,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,19 +50,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "20250220063131_UserRole.cs",
-              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Migrations\\ECommerce\\20250220063131_UserRole.cs",
-              "RelativeDocumentMoniker": "Migrations\\ECommerce\\20250220063131_UserRole.cs",
-              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Migrations\\ECommerce\\20250220063131_UserRole.cs",
-              "RelativeToolTip": "Migrations\\ECommerce\\20250220063131_UserRole.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T06:31:32.127Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "Enums.cs",
               "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\Enums.cs",
               "RelativeDocumentMoniker": "Entity\\Enums.cs",
@@ -66,13 +62,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "ECommerceContext.cs",
               "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Database\\ECommerceContext.cs",
               "RelativeDocumentMoniker": "Database\\ECommerceContext.cs",
               "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Database\\ECommerceContext.cs",
               "RelativeToolTip": "Database\\ECommerceContext.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAYwC8AAAASAAAA",
+              "ViewState": "AQIAABYAAAAAAAAAAAAzwD0AAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-18T10:44:07.024Z",
               "EditorCaption": ""
@@ -85,7 +81,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAACcEAAAAAAAAAAAewEoEAAAFAAAA",
+              "ViewState": "AQIAAFwEAAAAAAAAAAAmwG8EAACeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-11T06:21:44.169Z",
               "EditorCaption": ""
@@ -93,33 +89,72 @@
           ]
         },
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 220,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Order.cs",
-              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\ECommerceModels\\Order.cs",
-              "RelativeDocumentMoniker": "Entity\\ECommerceModels\\Order.cs",
-              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\ECommerceModels\\Order.cs",
-              "RelativeToolTip": "Entity\\ECommerceModels\\Order.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAmwBYAAAAXAAAA",
+              "DocumentIndex": 4,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\ECommerceModels\\Product.cs",
+              "RelativeDocumentMoniker": "Entity\\ECommerceModels\\Product.cs",
+              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\ECommerceModels\\Product.cs",
+              "RelativeToolTip": "Entity\\ECommerceModels\\Product.cs",
+              "ViewState": "AQIAACMAAAAAAAAAAAAuwAsAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T10:00:31.355Z",
+              "WhenOpened": "2025-02-25T06:42:41.971Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "OrderItems.cs",
               "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\ECommerceModels\\OrderItems.cs",
               "RelativeDocumentMoniker": "Entity\\ECommerceModels\\OrderItems.cs",
               "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\ECommerceModels\\OrderItems.cs",
               "RelativeToolTip": "Entity\\ECommerceModels\\OrderItems.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAgwA0AAAAFAAAA",
+              "ViewState": "AQIAABUAAAAAAAAAAAAowDIAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T10:00:34.831Z",
+              "WhenOpened": "2025-02-25T06:41:57.085Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OrderItemDto.cs",
+              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Dtos\\OrderItemDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\OrderItemDto.cs",
+              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Dtos\\OrderItemDto.cs",
+              "RelativeToolTip": "Dtos\\OrderItemDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-25T05:00:12.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Mapper.cs",
+              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Helpers\\Mapper.cs",
+              "RelativeDocumentMoniker": "Helpers\\Mapper.cs",
+              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Helpers\\Mapper.cs",
+              "RelativeToolTip": "Helpers\\Mapper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-25T05:11:48.659Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderInformationDto.cs",
+              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Dtos\\OrderInformationDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\OrderInformationDto.cs",
+              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Dtos\\OrderInformationDto.cs",
+              "RelativeToolTip": "Dtos\\OrderInformationDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-25T04:57:08.422Z",
               "EditorCaption": ""
             }
           ]

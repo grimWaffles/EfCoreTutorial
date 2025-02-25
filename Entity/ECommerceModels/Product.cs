@@ -59,8 +59,8 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         [DeleteBehavior(DeleteBehavior.ClientNoAction)]
         public virtual User ModifiedByUser { get; set; }
 
-        public Seller Seller { get; set; }
-        public ProductCategory ProductCategory { get; set; }
+        public virtual Seller Seller { get; set; }
+        public virtual ProductCategory ProductCategory { get; set; }
 
         [NotMapped]
         public string SellerCompanyName { get; set; }

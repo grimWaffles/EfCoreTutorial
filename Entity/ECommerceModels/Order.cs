@@ -47,7 +47,7 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         [DeleteBehavior(DeleteBehavior.ClientNoAction)]
         public virtual User ModifiedByUser { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         [NotMapped]
         public List<OrderItem> Items { get; set; }
