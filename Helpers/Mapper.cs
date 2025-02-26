@@ -36,7 +36,7 @@ namespace EfCoreTutorial.Helpers
                 CustomerName = o.User.Username,
                 Email = o.User.Email,
                 MobileNo = o.User.MobileNo,
-                OrderItems = dtoItems
+                OrderItems = dtoItems ?? new List<OrderItemDto>()
             };
         }
     }

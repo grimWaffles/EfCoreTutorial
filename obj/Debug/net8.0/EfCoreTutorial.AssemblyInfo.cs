@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EfCoreTutorial")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a9962410646d2599460c95fe285406362b2c8024")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f751a225f3d927e2a1d61cff3e0f44f2ca30bc48")]
 [assembly: System.Reflection.AssemblyProductAttribute("EfCoreTutorial")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EfCoreTutorial")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

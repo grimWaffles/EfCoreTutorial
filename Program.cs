@@ -1112,7 +1112,7 @@ void UpdateNetAmountOfOrders()
     }
 }
 
-Order getOrderInformation()
+Order GetOrderInformation()
 {
     int orderId = 11;
     List<OrderItem> allItems = new List<OrderItem>();
@@ -1140,6 +1140,8 @@ Order getOrderInformation()
             orderInfo = db.Orders.Where(o => o.Id == orderId).Include(o => o.User)
                 .Select(o => h.MapToOrderInformationDto(dtoItems, o))
                 .AsNoTracking().First();
+
+            var json = JsonSerializer.Serialize(orderInfo);
         }
         catch (Exception e)
         {
@@ -1149,6 +1151,53 @@ Order getOrderInformation()
 
     return new Order();
 }
+
+List<Order> GetAllPaginatedOrders(int pageNo, float pageSize, int lastEntryId = 3158)
+{
+    float totalOrders = 0; float totalPages = 0; List<OrderInformationDto> orders = new List<OrderInformationDto>();
+
+    using (var db = new EcommerceContext())
+    {
+        totalOrders = db.Orders.Count();
+        totalPages = totalOrders / pageSize;
+
+        totalPages = totalPages % 1 == 0 ? totalPages : (int)totalPages + 1;
+
+        ////Method #1 Fetch/Offset or Skip/Take
+        //DateTime startTime = DateTime.Now;
+
+        //orders = db.Orders.Include(o => o.User)
+        //    .OrderBy(o => o.OrderDate)
+        //    .OrderBy(o => o.OrderCounter)
+        //    .Skip(((int)pageNo - 1) * (int)pageSize)
+        //    .Take((int)pageSize)
+        //    .Select(o => h.MapToOrderInformationDto(null, o))
+        //    .ToList();
+
+        //DateTime endTime = DateTime.Now;
+        //TimeSpan ts = endTime - startTime;
+
+        //Method #2 KeySet
+        DateTime startTime = DateTime.Now;
+
+        orders = db.Orders.Include(o => o.User)
+            .OrderBy(o => o.OrderDate)
+            .OrderBy(o => o.OrderCounter)
+            .Where(o => o.Id > lastEntryId)
+            .Take((int)pageSize)
+            .Select(o => h.MapToOrderInformationDto(null, o))
+            .ToList();
+
+        DateTime endTime = DateTime.Now;
+        TimeSpan ts = endTime - startTime;
+
+        Console.WriteLine($"Max ID of this page is {orders[orders.Count - 1].OrderId}");
+        Console.WriteLine($"Method #1 takes {ts.TotalMilliseconds} seconds to complete.");
+    }
+
+    return new List<Order>();
+}
+
 ///Main Execution Thread
 
 //InsertFirstUser();
@@ -1176,7 +1225,9 @@ Order getOrderInformation()
 //UpdateNetAmountOfOrders();
 
 //Console.WriteLine($"Updated all {maxOrders} order totals.");
-getOrderInformation();
+
+//GetOrderInformation();
+GetAllPaginatedOrders(2, 3158);
 Console.WriteLine("All Tasks completed");
 
 #endregion
