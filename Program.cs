@@ -1181,8 +1181,8 @@ List<Order> GetAllPaginatedOrders(int pageNo, float pageSize, int lastEntryId = 
         DateTime startTime = DateTime.Now;
 
         orders = db.Orders.Include(o => o.User)
-            .OrderBy(o => o.OrderDate)
-            .OrderBy(o => o.OrderCounter)
+            .OrderByDescending(o => o.OrderDate)
+            .OrderByDescending(o => o.OrderCounter)
             .Where(o => o.Id > lastEntryId)
             .Take((int)pageSize)
             .Select(o => h.MapToOrderInformationDto(null, o))
@@ -1196,6 +1196,30 @@ List<Order> GetAllPaginatedOrders(int pageNo, float pageSize, int lastEntryId = 
     }
 
     return new List<Order>();
+}
+
+void UpdateOrderDatesAndCounters()
+{
+    List<string> distinctDates = new List<string>();
+    int orderCount = 0;
+
+    using (var db = new EcommerceContext())
+    {
+        orderCount = db.Orders.Count();
+        distinctDates = db.Orders.Select(o => o.OrderDate.ToString("dd-MM-yyyy"))
+            .AsNoTracking().ToList()
+            .Distinct()
+            .ToList();
+    }
+
+    if(distinctDates.Count!= 1)
+    {
+        return;
+    }
+
+    //Take the order list
+
+    
 }
 
 ///Main Execution Thread
@@ -1227,7 +1251,11 @@ List<Order> GetAllPaginatedOrders(int pageNo, float pageSize, int lastEntryId = 
 //Console.WriteLine($"Updated all {maxOrders} order totals.");
 
 //GetOrderInformation();
-GetAllPaginatedOrders(2, 3158);
+
+//GetAllPaginatedOrders(2, 3158);
+
+UpdateOrderDatesAndCounters();
+
 Console.WriteLine("All Tasks completed");
 
 #endregion
