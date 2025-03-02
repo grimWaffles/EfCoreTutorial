@@ -1214,12 +1214,13 @@ void UpdateOrderDatesAndCounters()
 
     if(distinctDates.Count!= 1)
     {
+        Console.WriteLine("Orders have been divided into dates");
         return;
     }
 
     //Take the order list
+    Console.WriteLine("Orders have not been divided into dates");
 
-    
 }
 
 ///Main Execution Thread
