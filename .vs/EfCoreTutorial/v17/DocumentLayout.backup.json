@@ -40,9 +40,10 @@
               "RelativeDocumentMoniker": "Helpers\\Mapper.cs",
               "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Helpers\\Mapper.cs",
               "RelativeToolTip": "Helpers\\Mapper.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAqwCMAAAAeAAAA",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAqwCMAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-25T09:52:30.942Z"
+              "WhenOpened": "2025-02-25T09:52:30.942Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -52,9 +53,10 @@
               "RelativeDocumentMoniker": "Entity\\Enums.cs",
               "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\Enums.cs",
               "RelativeToolTip": "Entity\\Enums.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAJAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T06:27:50.978Z"
+              "WhenOpened": "2025-02-20T06:27:50.978Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -64,9 +66,10 @@
               "RelativeDocumentMoniker": "Database\\ECommerceContext.cs",
               "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Database\\ECommerceContext.cs",
               "RelativeToolTip": "Database\\ECommerceContext.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAzwD0AAAAsAAAA",
+              "ViewState": "AgIAABQAAAAAAAAAAAA8wC4AAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-18T10:44:07.024Z"
+              "WhenOpened": "2025-02-18T10:44:07.024Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -76,7 +79,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAALAEAAAAAAAAAAA6wLIEAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAFsEAAAAAAAAAAAywLkEAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-11T06:21:44.169Z",
               "EditorCaption": ""

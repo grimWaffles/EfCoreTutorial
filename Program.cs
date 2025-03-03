@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Threading.Tasks;
 using static EfCoreTutorial.Entity.Enums;
 
 Console.WriteLine("Hello, Wazi!");
@@ -1198,29 +1199,78 @@ List<Order> GetAllPaginatedOrders(int pageNo, float pageSize, int lastEntryId = 
     return new List<Order>();
 }
 
-void UpdateOrderDatesAndCounters()
+async Task UpdateOrderDatesAndCounters()
 {
-    List<string> distinctDates = new List<string>();
+    List<DateTime> distinctDates = new List<DateTime>();
     int orderCount = 0;
 
     using (var db = new EcommerceContext())
     {
-        orderCount = db.Orders.Count();
-        distinctDates = db.Orders.Select(o => o.OrderDate.ToString("dd-MM-yyyy"))
-            .AsNoTracking().ToList()
-            .Distinct()
-            .ToList();
+        orderCount = await db.Orders.CountAsync();
+        distinctDates = await db.Orders.AsNoTracking().Select(o => o.OrderDate.Date).Distinct().ToListAsync();
     }
 
-    if(distinctDates.Count!= 1)
+    if (distinctDates.Count != 1)
     {
         Console.WriteLine("Orders have been divided into dates");
         return;
     }
 
-    //Take the order list
-    Console.WriteLine("Orders have not been divided into dates");
+    //Generate a list of random dates
+    List<DateTime> dates = new List<DateTime>();
+    DateTime startDate = Convert.ToDateTime("2025-02-01");
+    dates.Add(startDate);
 
+    int count = 1;
+    while (count < 28)
+    {
+        dates.Add(startDate.AddDays(count));
+
+        count++;
+    }
+
+    //Fetch the list of orders
+    List<Order> orderList = new List<Order>();
+
+    using (var db = new EcommerceContext())
+    {
+        orderList = await db.Orders.ToListAsync();
+    }
+
+    if (orderList.Count() == 0)
+    {
+        Console.WriteLine("No orders were found.");
+    }
+
+    using (var db = new EcommerceContext())
+    {
+        using (var trx = await db.Database.BeginTransactionAsync())
+        {
+            try
+            {
+                foreach (Order o in orderList)
+                {
+                    DateTime currDate = dates[new Random().Next(0, dates.Count - 1)];
+                    int orderCounter = orderList.Where(o => o.OrderDate.Date == currDate.Date).Count() + 1;
+
+                    o.OrderDate = currDate;
+                    o.OrderCounter = orderCounter;
+                }
+
+                db.Orders.UpdateRange(orderList);
+                await db.SaveChangesAsync();
+
+                await trx.CommitAsync();
+
+                Console.WriteLine("Updated all orders");
+            }
+            catch (Exception e)
+            {
+                await trx.RollbackAsync();
+                Console.WriteLine("Failed to update Order dates.");
+            }
+        }
+    }
 }
 
 ///Main Execution Thread
@@ -1255,7 +1305,7 @@ void UpdateOrderDatesAndCounters()
 
 //GetAllPaginatedOrders(2, 3158);
 
-UpdateOrderDatesAndCounters();
+//await UpdateOrderDatesAndCounters();
 
 Console.WriteLine("All Tasks completed");
 
