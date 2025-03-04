@@ -23,6 +23,7 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         public DateTime OrderDate { get; set; }
         public int OrderCounter { get; set; }
         [Required]
+        [ForeignKey("UserId")]
         public int UserId { get; set; }
         public OrderStatus Status { get; set; }
         [Precision(18, 4)]

@@ -17,7 +17,7 @@ namespace EfCoreTutorial.Migrations.Ecommerce
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.1")
+                .HasAnnotation("ProductVersion", "9.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -56,7 +56,7 @@ namespace EfCoreTutorial.Migrations.Ecommerce
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("EfCoreTutorial.Entity.ECommerceModels.Order", b =>
@@ -109,7 +109,7 @@ namespace EfCoreTutorial.Migrations.Ecommerce
 
                     b.HasIndex("OrderDate", "OrderCounter");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("EfCoreTutorial.Entity.ECommerceModels.OrderItem", b =>
@@ -162,7 +162,7 @@ namespace EfCoreTutorial.Migrations.Ecommerce
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("EfCoreTutorial.Entity.ECommerceModels.Product", b =>
@@ -224,7 +224,7 @@ namespace EfCoreTutorial.Migrations.Ecommerce
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("EfCoreTutorial.Entity.ECommerceModels.ProductCategory", b =>
@@ -264,7 +264,7 @@ namespace EfCoreTutorial.Migrations.Ecommerce
 
                     b.HasIndex("ModifiedBy");
 
-                    b.ToTable("ProductCategories");
+                    b.ToTable("ProductCategories", (string)null);
                 });
 
             modelBuilder.Entity("EfCoreTutorial.Entity.ECommerceModels.Role", b =>
@@ -304,7 +304,7 @@ namespace EfCoreTutorial.Migrations.Ecommerce
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("EfCoreTutorial.Entity.ECommerceModels.Seller", b =>
@@ -363,7 +363,7 @@ namespace EfCoreTutorial.Migrations.Ecommerce
                     b.HasIndex("MobileNo", "Email")
                         .IsUnique();
 
-                    b.ToTable("Sellers");
+                    b.ToTable("Sellers", (string)null);
                 });
 
             modelBuilder.Entity("EfCoreTutorial.Entity.ECommerceModels.User", b =>
@@ -426,7 +426,7 @@ namespace EfCoreTutorial.Migrations.Ecommerce
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("EfCoreTutorial.Entity.ECommerceModels.Cart", b =>

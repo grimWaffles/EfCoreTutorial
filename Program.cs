@@ -1263,6 +1263,128 @@ async Task UpdateOrderDatesAndCounters()
     }
 }
 
+void LoadCustomerOrderExpense()
+{
+    using (var db = new EcommerceContext())
+    {
+        DateTime startDate = Convert.ToDateTime("2025-02-01");
+        DateTime endDate = Convert.ToDateTime("2025-02-28");
+
+        List<CustomerTotalExpenseReport> result = db.Orders.Include(o => o.User)
+            .Where(o => o.OrderDate.Date >= startDate.Date && o.OrderDate.Date <= endDate.Date)
+            .GroupBy(x => new { x.User.Id, x.User.Username, x.User.MobileNo, x.User.Email })
+            .Select(y => new CustomerTotalExpenseReport()
+            {
+                UserId = y.Key.Id,
+                Username = y.Key.Username,
+                MobileNo = y.Key.MobileNo,
+                Email = y.Key.Email,
+                TotalExpense = y.Sum(y => y.NetAmount)
+            })
+            .ToList();
+
+        foreach (var record in result)
+        {
+            Console.WriteLine($"Username: {record.Username}, Total Expense: ${Math.Round(record.TotalExpense, 2).ToString("#,##0.00")}");
+        }
+    }
+}
+
+void GroupJoiningLinqQuery()
+{
+    string demoSql = @" select 
+	                        o.UserId,u.Username, u.MobileNo, u.Email, oi.TotalItemsPurchased, sum(o.NetAmount) TotalExpense
+                        from Orders o
+	                        inner join Users u on u.Id = o.UserId
+	                        inner join (
+		                        select
+			                        o.UserId, count(*) TotalItemsPurchased
+		                        from OrderItems oi
+			                        inner join Orders o on o.Id = oi.OrderId
+		                        group by o.UserId
+	                        ) oi on oi.UserId = o.UserId
+                        where o.OrderDate between '20250201' and '20250301'
+                        group by o.UserId,u.Username, u.MobileNo, u.Email, oi.TotalItemsPurchased
+                        order by o.UserId";
+
+    using (var db = new EcommerceContext())
+    {
+        DateTime startDate = Convert.ToDateTime("2025-02-01");
+        DateTime endDate = Convert.ToDateTime("2025-02-28");
+
+        //Own
+        List<CustomerTotalExpenseReport> result = db.Orders.Include(o => o.User)
+            .Where(o => o.OrderDate.Date >= startDate.Date && o.OrderDate.Date <= endDate.Date)
+            .GroupBy(x => new { x.User.Id, x.User.Username, x.User.MobileNo, x.User.Email })
+            .Select(y => new
+            {
+                y.Key.Id,
+                y.Key.Username,
+                y.Key.MobileNo,
+                y.Key.Email,
+                TotalExpense = y.Sum(y => y.NetAmount)
+            })
+            .GroupJoin(
+                db.OrderItems.Include(oi => oi.Order).GroupBy(oi => oi.Order.UserId)
+                .Select(x => new { x.Key, TotalItems = x.Count() }),
+                o => o.Id,
+                x => x.Key,
+                (o, x) => new { o, x = x.First() }
+            )
+            .Select(a => new CustomerTotalExpenseReport()
+            {
+                UserId = a.o.Id,
+                Username = a.o.Username,
+                MobileNo = a.o.MobileNo,
+                Email = a.o.Email,
+                TotalExpense = a.o.TotalExpense,
+                TotalItemsPurchased = a.x.TotalItems
+            })
+            .OrderBy(a => a.UserId)
+            .ToList();
+
+        //GPT Optimized
+        var orderItemsGroupedByUserId = db.OrderItems
+            .Include(oi => oi.Order)
+            .GroupBy(oi => oi.Order.UserId)
+            .Select(x => new { x.Key, TotalItems = x.Count() });
+
+        List<CustomerTotalExpenseReport> result2 = db.Orders.Include(o => o.User)
+            .Where(o => o.OrderDate.Date >= startDate.Date && o.OrderDate.Date <= endDate.Date)
+            .GroupBy(x => new { x.User.Id, x.User.Username, x.User.MobileNo, x.User.Email })
+            .Select(y => new
+            {
+                y.Key.Id,
+                y.Key.Username,
+                y.Key.MobileNo,
+                y.Key.Email,
+                TotalExpense = y.Sum(y => y.NetAmount)
+            })
+            .GroupJoin(
+                orderItemsGroupedByUserId,
+                o => o.Id,
+                x => x.Key,
+                (o, x) => new { o, x = x.First() }
+            )
+            .Select(a => new CustomerTotalExpenseReport()
+            {
+                UserId = a.o.Id,
+                Username = a.o.Username,
+                MobileNo = a.o.MobileNo,
+                Email = a.o.Email,
+                TotalExpense = a.o.TotalExpense,
+                TotalItemsPurchased = a.x.TotalItems
+            })
+            .OrderBy(a => a.UserId)
+            .ToList();
+
+        foreach (var record in result2)
+        {
+            Console.WriteLine($"Username: {record.Username}, Total Items Purchased: {record.TotalItemsPurchased}, Total Expense: {Math.Round(record.TotalExpense, 2).ToString("#,##0.00")}");
+        }
+    }
+}
+
 ///Main Execution Thread
 
 //InsertFirstUser();
@@ -1295,7 +1417,10 @@ async Task UpdateOrderDatesAndCounters()
 
 //GetAllPaginatedOrders(2, 3158);
 
-await UpdateOrderDatesAndCounters();
+//await UpdateOrderDatesAndCounters();
+
+//LoadCustomerOrderExpense();
+GroupJoiningLinqQuery();
 
 Console.WriteLine("All Tasks completed");
 
