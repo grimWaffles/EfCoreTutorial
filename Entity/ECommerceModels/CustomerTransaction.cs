@@ -10,24 +10,20 @@ using static EfCoreTutorial.Entity.Enums;
 
 namespace EfCoreTutorial.Entity.ECommerceModels
 {
-    [Index(nameof(OrderDate), nameof(OrderCounter))]
-    public class Order
+    public class CustomerTransaction
     {
-        public Order()
-        {
-            Items = new List<OrderItem>();
-        }
-
         [Key]
         public int Id { get; set; }
-        public DateTime OrderDate { get; set; }
-        public int OrderCounter { get; set; }
+
         [Required]
-        [ForeignKey("UserId")]
         public int UserId { get; set; }
-        public OrderStatus Status { get; set; }
-        [Precision(18, 4)]
-        public decimal NetAmount { get; set; }
+
+        public DateTime TransactionDate { get; set; }
+
+        public TransactionType TransactionType { get; set; }
+
+        [Precision(18,4)]
+        public decimal Amount { get; set; }
 
         [Required]
         public int CreatedBy { get; set; }
@@ -40,6 +36,7 @@ namespace EfCoreTutorial.Entity.ECommerceModels
 
         public bool IsDeleted { get; set; } = false;
 
+        //Foreign keys
         [ForeignKey(nameof(CreatedBy))]
         [DeleteBehavior(DeleteBehavior.ClientNoAction)]
         public virtual User CreatedByUser { get; set; }
@@ -47,10 +44,6 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         [ForeignKey(nameof(ModifiedBy))]
         [DeleteBehavior(DeleteBehavior.ClientNoAction)]
         public virtual User ModifiedByUser { get; set; }
-
         public virtual User User { get; set; }
-
-        [NotMapped]
-        public List<OrderItem> Items { get; set; }
     }
 }

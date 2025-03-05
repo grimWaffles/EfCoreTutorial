@@ -1,33 +1,34 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static EfCoreTutorial.Entity.Enums;
 
 namespace EfCoreTutorial.Entity.ECommerceModels
 {
-    [Index(nameof(OrderDate), nameof(OrderCounter))]
-    public class Order
+    [Index(nameof(TransactionDate), nameof(UserId))]
+    public class AccountSummaryHistory
     {
-        public Order()
-        {
-            Items = new List<OrderItem>();
-        }
+        public DateTime TransactionDate { get; set; }
 
-        [Key]
-        public int Id { get; set; }
-        public DateTime OrderDate { get; set; }
-        public int OrderCounter { get; set; }
         [Required]
-        [ForeignKey("UserId")]
         public int UserId { get; set; }
-        public OrderStatus Status { get; set; }
+
         [Precision(18, 4)]
-        public decimal NetAmount { get; set; }
+        public decimal CashAmount { get; set; }
+
+        [Precision(18, 4)]
+        public decimal TotalDepositAmount { get; set; }
+
+
+        [Precision(18, 4)]
+        public decimal TotalPurchaseAmount { get; set; }
+
+        [Precision(18, 4)]
+        public decimal TotalWithdrawAmount { get; set; }
 
         [Required]
         public int CreatedBy { get; set; }
@@ -40,6 +41,7 @@ namespace EfCoreTutorial.Entity.ECommerceModels
 
         public bool IsDeleted { get; set; } = false;
 
+        //Foreign keys
         [ForeignKey(nameof(CreatedBy))]
         [DeleteBehavior(DeleteBehavior.ClientNoAction)]
         public virtual User CreatedByUser { get; set; }
@@ -49,8 +51,5 @@ namespace EfCoreTutorial.Entity.ECommerceModels
         public virtual User ModifiedByUser { get; set; }
 
         public virtual User User { get; set; }
-
-        [NotMapped]
-        public List<OrderItem> Items { get; set; }
     }
 }

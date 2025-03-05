@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text.Json;
+using System.Threading.Tasks;
 using static EfCoreTutorial.Entity.Enums;
 
 Console.WriteLine("Hello, Wazi!");
@@ -1198,30 +1200,303 @@ List<Order> GetAllPaginatedOrders(int pageNo, float pageSize, int lastEntryId = 
     return new List<Order>();
 }
 
-void UpdateOrderDatesAndCounters()
+async Task UpdateOrderDatesAndCounters()
 {
-    List<string> distinctDates = new List<string>();
-    int orderCount = 0;
+    List<DateTime> distinctDates = new List<DateTime>();
+
+    //Fetch the list of orders
+    List<Order> orderList = new List<Order>();
 
     using (var db = new EcommerceContext())
     {
-        orderCount = db.Orders.Count();
-        distinctDates = db.Orders.Select(o => o.OrderDate.ToString("dd-MM-yyyy"))
-            .AsNoTracking().ToList()
-            .Distinct()
-            .ToList();
+        orderList = await db.Orders.ToListAsync();
+
+        if (orderList.Count() == 0)
+        {
+            Console.WriteLine("No orders were found.");
+            return;
+        }
+
+        distinctDates = orderList.Select(o => o.OrderDate.Date).Distinct().ToList();
+
+        if (distinctDates.Count != 1)
+        {
+            Console.WriteLine("Orders have been divided into dates");
+            return;
+        }
+
+        //Generate a list of random dates
+        List<DateTime> dates = new List<DateTime>();
+
+        DateTime startDate = Convert.ToDateTime("2025-02-01");
+        dates = Enumerable.Range(1, 28).Select(o => startDate.AddDays(o)).ToList();
+
+        Random r = new Random(); DateTime currDate; int orderCounter;
+
+        foreach (Order o in orderList)
+        {
+            currDate = dates[r.Next(0, dates.Count - 1)];
+            orderCounter = orderList.Where(o => o.OrderDate.Date == currDate.Date).Count() + 1;
+
+            o.OrderDate = currDate;
+            o.OrderCounter = orderCounter;
+        }
+
+        using (var trx = await db.Database.BeginTransactionAsync())
+        {
+            try
+            {
+                db.Orders.UpdateRange(orderList);
+
+                await db.SaveChangesAsync();
+
+                await trx.CommitAsync();
+
+                Console.WriteLine("Updated all orders");
+            }
+            catch (Exception e)
+            {
+                await trx.RollbackAsync();
+
+                Console.WriteLine("Failed to update Order dates.");
+            }
+        }
     }
-
-    if(distinctDates.Count!= 1)
-    {
-        return;
-    }
-
-    //Take the order list
-
-    
 }
 
+void LoadCustomerOrderExpenseReport()
+{
+    using (var db = new EcommerceContext())
+    {
+        DateTime startDate = Convert.ToDateTime("2025-02-01");
+        DateTime endDate = Convert.ToDateTime("2025-02-28");
+
+        List<CustomerTotalExpenseReport> result = db.Orders.Include(o => o.User)
+            .Where(o => o.OrderDate.Date >= startDate.Date && o.OrderDate.Date <= endDate.Date)
+            .GroupBy(x => new { x.User.Id, x.User.Username, x.User.MobileNo, x.User.Email })
+            .Select(y => new CustomerTotalExpenseReport()
+            {
+                UserId = y.Key.Id,
+                Username = y.Key.Username,
+                MobileNo = y.Key.MobileNo,
+                Email = y.Key.Email,
+                TotalExpense = y.Sum(y => y.NetAmount)
+            })
+            .ToList();
+
+        foreach (var record in result)
+        {
+            Console.WriteLine($"Username: {record.Username}, Total Expense: ${Math.Round(record.TotalExpense, 2).ToString("#,##0.00")}");
+        }
+    }
+}
+
+void GroupJoiningLinqQuery()
+{
+    //string demoSql = @" select 
+    //                     o.UserId,u.Username, u.MobileNo, u.Email, oi.TotalItemsPurchased, sum(o.NetAmount) TotalExpense
+    //                    from Orders o
+    //                     inner join Users u on u.Id = o.UserId
+    //                     inner join (
+    //                      select
+    //                       o.UserId, count(*) TotalItemsPurchased
+    //                      from OrderItems oi
+    //                       inner join Orders o on o.Id = oi.OrderId
+    //                      group by o.UserId
+    //                     ) oi on oi.UserId = o.UserId
+    //                    where o.OrderDate between '20250201' and '20250301'
+    //                    group by o.UserId,u.Username, u.MobileNo, u.Email, oi.TotalItemsPurchased
+    //                    order by o.UserId";
+
+    using (var db = new EcommerceContext())
+    {
+        DateTime startDate = Convert.ToDateTime("2025-02-01");
+        DateTime endDate = Convert.ToDateTime("2025-02-28");
+
+        //Own
+        List<CustomerTotalExpenseReport> result = db.Orders.AsNoTracking().Include(o => o.User)
+            .Where(o => o.OrderDate.Date >= startDate.Date && o.OrderDate.Date <= endDate.Date)
+            .GroupBy(x => new { x.User.Id, x.User.Username, x.User.MobileNo, x.User.Email })
+            .Select(y => new
+            {
+                y.Key.Id,
+                y.Key.Username,
+                y.Key.MobileNo,
+                y.Key.Email,
+                TotalExpense = y.Sum(y => y.NetAmount)
+            })
+            .GroupJoin(
+                db.OrderItems.AsNoTracking().Include(oi => oi.Order).GroupBy(oi => oi.Order.UserId)
+                .Select(x => new { x.Key, TotalItems = x.Count() }),
+                o => o.Id,
+                x => x.Key,
+                (o, x) => new { o, x = x.First() }
+            )
+            .Select(a => new CustomerTotalExpenseReport()
+            {
+                UserId = a.o.Id,
+                Username = a.o.Username,
+                MobileNo = a.o.MobileNo,
+                Email = a.o.Email,
+                TotalExpense = a.o.TotalExpense,
+                TotalItemsPurchased = a.x.TotalItems
+            })
+            .OrderBy(a => a.UserId)
+            .ToList();
+
+        //GPT Optimized
+        var orderItemsGroupedByUserId = db.OrderItems.AsNoTracking()
+            .Include(oi => oi.Order)
+            .GroupBy(oi => oi.Order.UserId)
+            .Select(x => new { x.Key, TotalItems = x.Count() });
+
+        List<CustomerTotalExpenseReport> result2 = db.Orders.AsNoTracking().Include(o => o.User)
+            .Where(o => o.OrderDate.Date >= startDate.Date && o.OrderDate.Date <= endDate.Date)
+            .GroupBy(x => new { x.User.Id, x.User.Username, x.User.MobileNo, x.User.Email })
+            .Select(y => new
+            {
+                y.Key.Id,
+                y.Key.Username,
+                y.Key.MobileNo,
+                y.Key.Email,
+                TotalExpense = y.Sum(y => y.NetAmount)
+            })
+            .GroupJoin(
+                orderItemsGroupedByUserId,
+                o => o.Id,
+                x => x.Key,
+                (o, x) => new { o, x = x.First() }
+            )
+            .Select(a => new CustomerTotalExpenseReport()
+            {
+                UserId = a.o.Id,
+                Username = a.o.Username,
+                MobileNo = a.o.MobileNo,
+                Email = a.o.Email,
+                TotalExpense = a.o.TotalExpense,
+                TotalItemsPurchased = a.x.TotalItems
+            })
+            .OrderBy(a => a.UserId)
+            .ToList();
+
+        foreach (var record in result2)
+        {
+            Console.WriteLine($"Username: {record.Username}, Total Items Purchased: {record.TotalItemsPurchased}, Total Expense: {Math.Round(record.TotalExpense, 2).ToString("#,##0.00")}");
+        }
+    }
+}
+
+void AddCustomerTransaction(Random r)
+{
+    List<CustomerTransaction> transactions = new List<CustomerTransaction>();
+
+    using (var db = new EcommerceContext())
+    {
+        if (db.CustomerTransactions.Any())
+        {
+            Console.WriteLine("Transactions have already been added.");
+            return;
+        }
+
+        var orders = db.Orders.GroupBy(o => new { o.OrderDate.Date, o.UserId }).Select(x => new { OrderDate = x.Key.Date, x.Key.UserId, TotalExpense = x.Sum(x => x.NetAmount) }).ToList();
+
+        ////Own version
+        //foreach (var order in orders)
+        //{
+        //    CustomerTransaction t = new CustomerTransaction()
+        //    {
+        //        UserId = order.UserId,
+        //        TransactionDate = order.OrderDate,
+        //        TransactionType = TransactionType.DEPOSIT,
+        //        Amount = (decimal)order.TotalExpense * (decimal)(1 + r.NextDouble()),
+        //        CreatedBy = 1,
+        //        CreatedDate = order.OrderDate,
+        //        IsDeleted = false,
+        //    };
+
+        //    CustomerTransaction p = new CustomerTransaction()
+        //    {
+        //        UserId = order.UserId,
+        //        TransactionDate = order.OrderDate,
+        //        TransactionType = TransactionType.PURCHASE,
+        //        Amount = (decimal)order.TotalExpense,
+        //        CreatedBy = 1,
+        //        CreatedDate = order.OrderDate,
+        //        IsDeleted = false,
+        //    };
+
+        //    transactions.Add(t);
+        //    transactions.Add(p);
+        //}
+
+        //GPT Optimized
+        transactions = orders.SelectMany(order => new[]
+        {
+            new CustomerTransaction()
+            {
+                UserId = order.UserId,
+                TransactionDate = order.OrderDate,
+                TransactionType = TransactionType.DEPOSIT,
+                Amount = (decimal)order.TotalExpense * (decimal)(1 + r.NextDouble()),
+                CreatedBy = 1,
+                CreatedDate = order.OrderDate,
+                IsDeleted = false,
+            },
+
+            new CustomerTransaction()
+            {
+                UserId = order.UserId,
+                TransactionDate = order.OrderDate,
+                TransactionType = TransactionType.PURCHASE,
+                Amount = (decimal)order.TotalExpense,
+                CreatedBy = 1,
+                CreatedDate = order.OrderDate,
+                IsDeleted = false,
+            }
+        }).ToList();
+
+        try
+        {
+            db.CustomerTransactions.AddRange(transactions);
+            db.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Failed to add transactions");
+            Console.WriteLine($"{e.Message}");
+        }
+    }
+}
+
+async Task<int> ProcessDailyTransactions()
+{
+    using(var db = new EcommerceContext())
+    {
+        try
+        {
+            await db.Database.ExecuteSqlAsync($@"
+                truncate table AccountSummaryHistories
+
+                Insert into AccountSummaryHistories(TransactionDate, UserId, CashAmount, TotalDepositAmount, TotalWithdrawAmount, TotalPurchaseAmount, CreatedBy, CreatedDate, IsDeleted)
+                select 
+		                Convert(date,ct.TransactionDate) TransactionDate, ct.UserId,
+		                sum(case when ct.TransactionType = 'deposit' then ct.Amount else 0 end) - sum(case when ct.TransactionType = 'purchase' then ct.Amount else 0 end) CashAmount,
+		                sum(case when ct.TransactionType = 'deposit' then ct.Amount else 0 end) TotalDeposit,
+		                sum(case when ct.TransactionType = 'purchase' then ct.Amount else 0 end) TotalPurchase,
+		                0 TotalWithdrawAmount,
+		                1, GETDATE(), 0
+                from CustomerTransactions ct
+                group by TransactionDate, UserId");
+
+            return 1;
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine($"{e.Message}");
+            return -1;
+        }
+    }
+}
 ///Main Execution Thread
 
 //InsertFirstUser();
@@ -1254,7 +1529,15 @@ void UpdateOrderDatesAndCounters()
 
 //GetAllPaginatedOrders(2, 3158);
 
-UpdateOrderDatesAndCounters();
+//await UpdateOrderDatesAndCounters();
+
+//LoadCustomerOrderExpense();
+//GroupJoiningLinqQuery();
+
+//Random r = new Random();
+//AddCustomerTransaction(r);
+
+await ProcessDailyTransactions();
 
 Console.WriteLine("All Tasks completed");
 

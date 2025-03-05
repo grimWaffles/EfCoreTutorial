@@ -32,6 +32,12 @@
 /.vs/ProjectEvaluation/efcoretutorial.metadata.v9.bin
 /.vs/ProjectEvaluation/efcoretutorial.projects.v9.bin
 /.vs/ProjectEvaluation/efcoretutorial.strings.v9.bin
+/.vs/EfCoreTutorial/DesignTimeBuild/.dtbcache.v2
+/.vs/EfCoreTutorial/v17/.futdcache.v2
+/.vs/EfCoreTutorial/v17/DocumentLayout.backup.json
+/.vs/ProjectEvaluation/efcoretutorial.metadata.v9.bin
+/.vs/ProjectEvaluation/efcoretutorial.projects.v9.bin
+/.vs/ProjectEvaluation/efcoretutorial.strings.v9.bin
 *.v2
 /.vs/EfCoreTutorial/v17/DocumentLayout.backup.json
 /obj/Debug/net8.0/EfCoreTutorial.csproj.AssemblyReference.cache
