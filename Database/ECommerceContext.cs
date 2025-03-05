@@ -19,6 +19,7 @@ namespace EfCoreTutorial.Database
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<CustomerTransaction> CustomerTransactions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -63,6 +64,9 @@ namespace EfCoreTutorial.Database
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Role>().Property(r=>r.Name).HasConversion(r=> r.ToString(), r => (UserRole) Enum.Parse(typeof(UserRole), r));
+
+            modelBuilder.Entity<CustomerTransaction>().Property(t => t.TransactionType).HasConversion(r => r.ToString(), r => (TransactionType)Enum.Parse(typeof(TransactionType), r));
+            modelBuilder.Entity<CustomerTransaction>().HasQueryFilter(t => !t.IsDeleted);
         }
     }
 }

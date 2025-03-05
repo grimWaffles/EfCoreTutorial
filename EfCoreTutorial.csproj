@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Database\SQL Scripts\" />
-    <Folder Include="Migrations\ECommercePlatform\" />
     <Folder Include="Notes\" />
   </ItemGroup>
 

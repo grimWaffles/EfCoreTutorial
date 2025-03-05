@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text.Json;
 using System.Threading.Tasks;
 using static EfCoreTutorial.Entity.Enums;
@@ -1263,7 +1264,7 @@ async Task UpdateOrderDatesAndCounters()
     }
 }
 
-void LoadCustomerOrderExpense()
+void LoadCustomerOrderExpenseReport()
 {
     using (var db = new EcommerceContext())
     {
@@ -1292,20 +1293,20 @@ void LoadCustomerOrderExpense()
 
 void GroupJoiningLinqQuery()
 {
-    string demoSql = @" select 
-	                        o.UserId,u.Username, u.MobileNo, u.Email, oi.TotalItemsPurchased, sum(o.NetAmount) TotalExpense
-                        from Orders o
-	                        inner join Users u on u.Id = o.UserId
-	                        inner join (
-		                        select
-			                        o.UserId, count(*) TotalItemsPurchased
-		                        from OrderItems oi
-			                        inner join Orders o on o.Id = oi.OrderId
-		                        group by o.UserId
-	                        ) oi on oi.UserId = o.UserId
-                        where o.OrderDate between '20250201' and '20250301'
-                        group by o.UserId,u.Username, u.MobileNo, u.Email, oi.TotalItemsPurchased
-                        order by o.UserId";
+    //string demoSql = @" select 
+    //                     o.UserId,u.Username, u.MobileNo, u.Email, oi.TotalItemsPurchased, sum(o.NetAmount) TotalExpense
+    //                    from Orders o
+    //                     inner join Users u on u.Id = o.UserId
+    //                     inner join (
+    //                      select
+    //                       o.UserId, count(*) TotalItemsPurchased
+    //                      from OrderItems oi
+    //                       inner join Orders o on o.Id = oi.OrderId
+    //                      group by o.UserId
+    //                     ) oi on oi.UserId = o.UserId
+    //                    where o.OrderDate between '20250201' and '20250301'
+    //                    group by o.UserId,u.Username, u.MobileNo, u.Email, oi.TotalItemsPurchased
+    //                    order by o.UserId";
 
     using (var db = new EcommerceContext())
     {
@@ -1385,6 +1386,87 @@ void GroupJoiningLinqQuery()
     }
 }
 
+void AddCustomerTransaction(Random r)
+{
+    List<CustomerTransaction> transactions = new List<CustomerTransaction>();
+
+    using (var db = new EcommerceContext())
+    {
+        if (db.CustomerTransactions.Any())
+        {
+            Console.WriteLine("Transactions have already been added.");
+            return;
+        }
+
+        var orders = db.Orders.GroupBy(o => new { o.OrderDate.Date, o.UserId }).Select(x => new { OrderDate = x.Key.Date, x.Key.UserId, TotalExpense = x.Sum(x => x.NetAmount) }).ToList();
+
+        //Own version
+        foreach (var order in orders)
+        {
+            CustomerTransaction t = new CustomerTransaction()
+            {
+                UserId = order.UserId,
+                TransactionDate = order.OrderDate,
+                TransactionType = TransactionType.DEPOSIT,
+                Amount = (decimal)order.TotalExpense * (decimal)(1 + r.NextDouble()),
+                CreatedBy = 1,
+                CreatedDate = order.OrderDate,
+                IsDeleted = false,
+            };
+
+            CustomerTransaction p = new CustomerTransaction()
+            {
+                UserId = order.UserId,
+                TransactionDate = order.OrderDate,
+                TransactionType = TransactionType.PURCHASE,
+                Amount = (decimal)order.TotalExpense,
+                CreatedBy = 1,
+                CreatedDate = order.OrderDate,
+                IsDeleted = false,
+            };
+
+            transactions.Add(t);
+            transactions.Add(p);
+        }
+
+        ////GPT Optimized
+        //transactions = orders.SelectMany(order => new[]
+        //{
+        //    new CustomerTransaction()
+        //    {
+        //        UserId = order.UserId,
+        //        TransactionDate = order.OrderDate,
+        //        TransactionType = TransactionType.DEPOSIT,
+        //        Amount = (decimal)order.TotalExpense * (decimal)(1 + r.NextDouble()),
+        //        CreatedBy = 1,
+        //        CreatedDate = order.OrderDate,
+        //        IsDeleted = false,
+        //    },
+
+        //    new CustomerTransaction()
+        //    {
+        //        UserId = order.UserId,
+        //        TransactionDate = order.OrderDate,
+        //        TransactionType = TransactionType.PURCHASE,
+        //        Amount = (decimal)order.TotalExpense,
+        //        CreatedBy = 1,
+        //        CreatedDate = order.OrderDate,
+        //        IsDeleted = false,
+        //    }
+        //}).ToList();
+
+        try
+        {
+            //db.CustomerTransactions.AddRange(transactions);
+            //db.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Failed to add transactions");
+            Console.WriteLine($"{e.Message}");
+        }
+    }
+}
 ///Main Execution Thread
 
 //InsertFirstUser();
@@ -1420,7 +1502,10 @@ void GroupJoiningLinqQuery()
 //await UpdateOrderDatesAndCounters();
 
 //LoadCustomerOrderExpense();
-GroupJoiningLinqQuery();
+//GroupJoiningLinqQuery();
+
+Random r = new Random();
+AddCustomerTransaction(r);
 
 Console.WriteLine("All Tasks completed");
 
