@@ -20,10 +20,12 @@ namespace EfCoreTutorial.Database
         public DbSet<Order> Orders { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<CustomerTransaction> CustomerTransactions { get; set; }
+        public DbSet<AccountSummaryHistory> AccountSummaryHistories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-5DP7KR2\\MSSQLSERVERWAZI;Database=ECommercePlatform;Trusted_Connection=True;TrustServerCertificate=True");
+            //optionsBuilder.UseSqlServer("Server=DESKTOP-5DP7KR2\\MSSQLSERVERWAZI;Database=ECommercePlatform;Trusted_Connection=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-C52SB46;Database=ECommercePlatform;Trusted_Connection=True;TrustServerCertificate=True;User=sa;Password=sa@1234");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -67,6 +69,8 @@ namespace EfCoreTutorial.Database
 
             modelBuilder.Entity<CustomerTransaction>().Property(t => t.TransactionType).HasConversion(r => r.ToString(), r => (TransactionType)Enum.Parse(typeof(TransactionType), r));
             modelBuilder.Entity<CustomerTransaction>().HasQueryFilter(t => !t.IsDeleted);
+
+            modelBuilder.Entity<AccountSummaryHistory>().HasNoKey();
         }
     }
 }
