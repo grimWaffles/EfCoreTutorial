@@ -4,16 +4,19 @@ using EfCoreTutorial.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace EfCoreTutorial.Migrations.Ecommerce
+namespace EfCoreTutorial.Migrations.ecommerce
 {
     [DbContext(typeof(EcommerceContext))]
-    partial class EcommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20250305053844_CustomerTransaction")]
+    partial class CustomerTransaction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,9 +87,6 @@ namespace EfCoreTutorial.Migrations.Ecommerce
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("TransactionType")

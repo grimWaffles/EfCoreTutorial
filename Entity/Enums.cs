@@ -28,5 +28,13 @@ namespace EfCoreTutorial.Entity
             CUSTOMER,
             SELLER
         }
+
+        public enum TransactionType
+        {
+            DEPOSIT,
+            WITHDRAW,
+            PURCHASE,
+            SELL
+        }
     }
 }
