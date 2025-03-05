@@ -1,21 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\",
+  "WorkspaceRootPath": "D:\\Work\\Dev\\C# DotNet\\Console Apps\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\work\\dev\\c# dotnet\\console apps\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\database\\ecommercecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\work\\dev\\c# dotnet\\console apps\\database\\ecommercecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:database\\ecommercecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\helpers\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\work\\dev\\c# dotnet\\console apps\\helpers\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:helpers\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\old pc backup\\projects\\test project\\efcoretutorial_v1\\entity\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|d:\\work\\dev\\c# dotnet\\console apps\\entity\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E3C34E98-08CD-4215-942C-34BD3470DD9C}|EfCoreTutorial.csproj|solutionrelative:entity\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -36,9 +36,9 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Mapper.cs",
-              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Helpers\\Mapper.cs",
+              "DocumentMoniker": "D:\\Work\\Dev\\C# DotNet\\Console Apps\\Helpers\\Mapper.cs",
               "RelativeDocumentMoniker": "Helpers\\Mapper.cs",
-              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Helpers\\Mapper.cs",
+              "ToolTip": "D:\\Work\\Dev\\C# DotNet\\Console Apps\\Helpers\\Mapper.cs",
               "RelativeToolTip": "Helpers\\Mapper.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAqwCMAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -48,9 +48,9 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Enums.cs",
-              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\Enums.cs",
+              "DocumentMoniker": "D:\\Work\\Dev\\C# DotNet\\Console Apps\\Entity\\Enums.cs",
               "RelativeDocumentMoniker": "Entity\\Enums.cs",
-              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Entity\\Enums.cs",
+              "ToolTip": "D:\\Work\\Dev\\C# DotNet\\Console Apps\\Entity\\Enums.cs",
               "RelativeToolTip": "Entity\\Enums.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -60,9 +60,9 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "ECommerceContext.cs",
-              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Database\\ECommerceContext.cs",
+              "DocumentMoniker": "D:\\Work\\Dev\\C# DotNet\\Console Apps\\Database\\ECommerceContext.cs",
               "RelativeDocumentMoniker": "Database\\ECommerceContext.cs",
-              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Database\\ECommerceContext.cs",
+              "ToolTip": "D:\\Work\\Dev\\C# DotNet\\Console Apps\\Database\\ECommerceContext.cs",
               "RelativeToolTip": "Database\\ECommerceContext.cs",
               "ViewState": "AQIAABYAAAAAAAAAAAAzwD0AAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -72,14 +72,18 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Program.cs",
+              "DocumentMoniker": "D:\\Work\\Dev\\C# DotNet\\Console Apps\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\Old PC Backup\\Projects\\Test Project\\EfCoreTutorial_v1\\Program.cs",
+              "ToolTip": "D:\\Work\\Dev\\C# DotNet\\Console Apps\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAALAEAAAAAAAAAAA6wLIEAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-11T06:21:44.169Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             }
           ]
         }
